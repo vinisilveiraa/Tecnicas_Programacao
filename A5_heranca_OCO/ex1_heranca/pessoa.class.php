@@ -19,6 +19,18 @@ abstract class Pessoa
         return $this -> endereco;
     }
 
+    public function setNome($nome) {
+        $this->nome = $nome;
+    }
+    
+    public function setTelefone($telefone) {
+        $this->telefone = $telefone;
+    }
+    
+    public function setEndereco($endereco) {
+        $this->endereco = $endereco;
+    }
+
     public function Inserir($Pessoa) {
         echo "Inserir";
     }

@@ -21,5 +21,13 @@ class Poupanca extends Conta
             echo "Você perderá os rendimentos";
         } 
         parent::Retirar($valor);
+        
+        if ($this->saldo >= $valor) {
+            parent:: retirar($valor);
+        }
+        else {
+          echo "<br>";
+          echo "Conta poupança sem saldo suficiente!";
+        }
     }
 }
