@@ -23,17 +23,24 @@ class UsuarioController
 				$usuario = new Usuarios(email:$_POST["email"]);
 				$usuarioDAO = new usuarioDAO;
 				$retorno = $usuarioDAO->login($usuario);
-				
-				if(is_array($retorno)) {
+
+				if (is_array($retorno)) {
 					if(count($retorno) > 0) {
 						//verificar se a senha corresponde
 						if(password_verify($_POST['senha'],$retorno[0]->senha)) {
 							//logar
-							$msg[2] = "Login com sucesso!";
+							if (!isset($_SESSION)) {
+								session_start();
+							}
+							$_SESSION["nome"] = $retorno[0]->nome;
+							$_SESSION["id"] = $retorno[0]->id_usuarios;
+							$_SESSION["email"] = $retorno[0]->email;
+							
+							header("location:index.php");
 						}
 					}
 					else {
-						$msg[2] = "Verifique os dados digitados";
+						$msg[2] = "Verifique os dados!";
 					}
 				} 
 				else {
@@ -85,5 +92,24 @@ class UsuarioController
 			}
 		}
 		require_once "Views/form_usuario.php";
+	}
+
+	public function logout() {
+		if (!isset($_SESSION)) {
+			session_start();
+		}
+		$_SESSION = array();
+		session_destroy();
+
+		header("location:index.php");
+	} // fim do logout
+
+	public function esqueci_senha() {
+
+		$msg = "";
+		if($_POST) {
+
+		}
+		require_once "Views/form_email.php";
 	}
 } //fim da classe

@@ -28,8 +28,9 @@ class usuarioDAO extends Conexao
     }
     
     public function login($usuario) {
-        $sql = "SELECT id_usuario, email, senha FROM usuarios WHERE email = ?";
+        $sql = "SELECT id_usuarios, email, senha, nome FROM usuarios WHERE email = ?";
         try {
+
             $stm = $this->db->prepare($sql);
             $stm->bindValue(1, $usuario->getemail());
             $stm->execute();
@@ -45,7 +46,10 @@ class usuarioDAO extends Conexao
     
     public function verificar_email($usuario) {
         $sql = "SELECT email FROM usuarios WHERE email = ?";
+
+
         try {
+
             $stm = $this->db->prepare($sql);
             $stm->bindValue(1, $usuario->getemail());
             $stm->execute();

@@ -24,6 +24,9 @@ require_once "cabecalho.php";
             <button type="submit" class="btn btn-primary">Enviar</button>
     </div>
     </form>
+
+    <a href="index.php?controle=UsuarioController&metodo=esqueci_senha">Esqueci Minha Senha</a>
+
 </div>
 </div>
 </body>
