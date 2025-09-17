@@ -45,7 +45,7 @@ class usuarioDAO extends Conexao
     }
     
     public function verificar_email($usuario) {
-        $sql = "SELECT email FROM usuarios WHERE email = ?";
+        $sql = "SELECT email, nome, id_usuarios FROM usuarios WHERE email = ?";
 
 
         try {

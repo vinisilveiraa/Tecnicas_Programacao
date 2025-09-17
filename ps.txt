@@ -1,3 +1,4 @@
 colocar arquivos no C:\xampp\htdocs
 
 para abrir http://localhost/caminhodapasta.php
+pegar phpmailer e configphp no teams

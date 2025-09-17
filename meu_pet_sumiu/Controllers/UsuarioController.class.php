@@ -2,6 +2,7 @@
 require_once "Models/Conexao.class.php";
 require_once "Models/usuarioDAO.class.php";
 require_once "Models/Usuarios.class.php";
+require_once "config.php";
 class UsuarioController
 {
 	public function login()
@@ -107,8 +108,48 @@ class UsuarioController
 	public function esqueci_senha() {
 
 		$msg = "";
+		$msg_email = "Sera enviado um email para recuperacao de sua senha";
 		if($_POST) {
+			if(empty($_POST["email"])) {
+				$msg = "Preencha o Email";
+			} else {
+				// verificar se e um email de algum usuario do sistema
+				$usuario = new Usuarios(email:$_POST["email"]);
+				$usuarioDAO = new usuarioDAO();
+				$retorno = $usuarioDAO->verificar_email($usuario);
 
+				if(is_array($retorno)) {
+					if(count($retorno) > 0) {
+						// enviar email
+						$assunto = "Recuperação de senha - meu pet sumiu";
+						$link = "index.php?controle=UsuarioController&metodo=trocar_senha&id=" . base64_encode($retorno[0]->id_usuario);
+						$nomeDestino = $retorno[0]->nome;
+						$destino = $retorno[0]->email;
+
+						$remetente = "seu_email";
+						$nomeRemetente = "meu pet sumiu";
+
+						$mensagem = "
+						<h2> Senhor (a) " . $nomeDestino . "</h2><br />
+						<p> Recebemos a solicitacao de recuperacao de senha. Caso nao tenha sido requerida por voce, desconsidere essa mensagem. Caso contrario, clique no link abaixo para informar nova senha</p>
+						<a href='" . $link . "'> Clique Aqui</a> <br /><br />
+						<p> Atenciosamente<br />" . $nomeRemetente . "</p>";
+
+						$ret= sendMail($assunto, $mensagem, $remetente, $nomeRemetente, $destino, $nomeDestino);
+						if ($ret) {
+							$msg_email= "Foi enviado um email de verificacao de senha. Verifique!!";
+						} else {
+							$msg_email= "Problema no envio do email de recuperacao de senha. Tente mais tarde!";
+						}
+						
+					} else {
+						$msg = "Verifique o email informado";
+					}
+				}
+				else {
+					$msg = "Verifique o email informado";
+				}
+			}
 		}
 		require_once "Views/form_email.php";
 	}
