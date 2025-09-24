@@ -108,6 +108,7 @@ class UsuarioController
 	public function esqueci_senha() {
 
 		$msg = "";
+		$link = "";
 		$msg_email = "Sera enviado um email para recuperacao de sua senha";
 		if($_POST) {
 			if(empty($_POST["email"])) {
@@ -122,7 +123,7 @@ class UsuarioController
 					if(count($retorno) > 0) {
 						// enviar email
 						$assunto = "Recuperação de senha - meu pet sumiu";
-						$link = "index.php?controle=UsuarioController&metodo=trocar_senha&id=" . base64_encode($retorno[0]->id_usuario);
+						$link = "http://localhost/meu_pet_sumiu/index.php?controle=UsuarioController&metodo=trocar_senha&id=" . base64_encode($retorno[0]->id_usuarios);
 						$nomeDestino = $retorno[0]->nome;
 						$destino = $retorno[0]->email;
 
@@ -130,21 +131,25 @@ class UsuarioController
 						$nomeRemetente = "meu pet sumiu";
 
 						$mensagem = "
-						<h2> Senhor (a) " . $nomeDestino . "</h2><br />
+						<h2> Senhor (a) " . $nomeDestino . "</h2>
+						<br />
 						<p> Recebemos a solicitacao de recuperacao de senha. Caso nao tenha sido requerida por voce, desconsidere essa mensagem. Caso contrario, clique no link abaixo para informar nova senha</p>
-						<a href='" . $link . "'> Clique Aqui</a> <br /><br />
+						<a href='" . $link . "'> Clique Aqui</a> 
+						<br /><br />
 						<p> Atenciosamente<br />" . $nomeRemetente . "</p>";
 
+						/*
 						$ret= sendMail($assunto, $mensagem, $remetente, $nomeRemetente, $destino, $nomeDestino);
 						if ($ret) {
 							$msg_email= "Foi enviado um email de verificacao de senha. Verifique!!";
 						} else {
 							$msg_email= "Problema no envio do email de recuperacao de senha. Tente mais tarde!";
 						}
+						*/
 						
 					} else {
 						$msg = "Verifique o email informado";
-					}
+					} 
 				}
 				else {
 					$msg = "Verifique o email informado";
@@ -152,5 +157,16 @@ class UsuarioController
 			}
 		}
 		require_once "Views/form_email.php";
+	}
+	
+	public function trocar_senha() {
+		$msg = array("","");
+		if(isset($_GET["id"])) {
+			$id = base64_decode($_GET["id"]);
+			if($_POST) {
+
+			}
+		require_once "Views/trocar_senha.php";	
+		}
 	}
 } //fim da classe
