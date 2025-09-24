@@ -1,0 +1,9 @@
+pegar phpmailer e configphp no teams
+
+extrair mailer na pasta dele 
+deixar config na root
+
+colocar senhas do app (pegar na conta google) no config e adicionar email em cima
+
+http://localhost/meu_pet_sumiu/
+link meu pet sumiu

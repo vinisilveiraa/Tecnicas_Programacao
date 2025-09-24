@@ -1,7 +1,6 @@
 colocar arquivos no C:\xampp\htdocs
 
 para abrir http://localhost/caminhodapasta.php
-pegar phpmailer.php e config.php no teams
+pegar phpmailer.php no teams
 
-phpmailer -> raiz dentro de outro PHPMailer 
-config -> controllers
+phpmailer -> raiz dentro de outro PHPMailer

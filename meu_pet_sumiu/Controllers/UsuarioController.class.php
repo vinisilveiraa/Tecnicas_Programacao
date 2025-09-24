@@ -164,7 +164,28 @@ class UsuarioController
 		if(isset($_GET["id"])) {
 			$id = base64_decode($_GET["id"]);
 			if($_POST) {
+				if(empty($_POST["senha"])) {
+					$msg[0] = "Senha Obrigatoria";
+					$erro = true;
+				}
+				if(empty($_POST["confirmar_senha"])) {
+					$msg[0] = "Confirme a senha";
+					$erro = true;
+				}
+				if(!$erro && $_POST["senha"] != $_POST["confirmar_senha"]) {
+					$msg[0] = "Senhas não são iguais";
+					$erro = true;
+				}
+				if(!$erro) {
+					//alterar senha no bd
+					$usuario = new Usuarios(id_usuario:$_POST["id_usuario"],
+					senha:password_hash($_POST["senha"], PASSWORD_DEFAULT));
 
+					$usuarioDAO = new usuarioDAO();
+					
+					$retorno = $usuarioDAO->alterar_senha($usuario);
+					header("location:index.php?controle=usuarioController&metodo=login");
+				}
 			}
 		require_once "Views/trocar_senha.php";	
 		}
