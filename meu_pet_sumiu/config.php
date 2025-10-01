@@ -18,8 +18,8 @@ function sendMail($assunto, $mensagem, $remetente, $nomeRemetente, $destino, $no
 		//$mail->SMTPDebug = 1;  // debugging: 1 = errors and messages, 2 = messages only
 		$mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for GMail
 		$mail->Port = 465;
-		$mail->Username = 'email'; // $email_username;
-		$mail->Password = 'senhaapp'; // $email_password;
+		$mail->Username = //$email_username;
+		$mail->Password = //$email_password;
 		/*
 	HOTMAIL
 	Host: smtp.live.com

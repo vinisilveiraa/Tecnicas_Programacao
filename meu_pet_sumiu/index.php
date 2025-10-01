@@ -1,5 +1,5 @@
 <?php
-	require __DIR__ . "/vendor/vlucas/phpdotenv";
+	require __DIR__ . '/vendor/vlucas/phpdotenv';
 	use Dotenv\Dotenv;
 	$dotenv = Dotenv :: createImmutable(__DIR__);
 	$dotenv->load();
