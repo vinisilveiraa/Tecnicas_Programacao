@@ -1,4 +1,5 @@
 <?php
+
 class Pet
 {
     public function __construct(
@@ -14,7 +15,7 @@ class Pet
         private string $cor = "",
         private string $observacoes = "",
         private string $situacao = "",
-        private Usuarios $usuario = new Usuarios()
+        private $usuario = null
     ) {}
     // fazer gets e sets para os pets
 
@@ -50,7 +51,7 @@ class Pet
     {
         return $this->imagem;
     }
-    public function getCorOlhos()
+    public function getCor_olhos()
     {
         return $this->cor_olhos;
     }
@@ -66,7 +67,11 @@ class Pet
     {
         return $this->situacao;
     }
-    
+    public function getUsuario()
+    {
+        return $this->usuario;
+    }
+
 
     public function setId_pet($id_pet)
     {
@@ -80,9 +85,9 @@ class Pet
     {
         $this->idade = $idade;
     }
-    public function setRaca($porte)
+    public function setRaca($raca)
     {
-        $this->porte = $porte;
+        $this->raca = $raca;
     }
     public function setPorte($porte)
     {

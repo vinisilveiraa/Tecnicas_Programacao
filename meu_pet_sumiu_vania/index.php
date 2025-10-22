@@ -1,16 +1,11 @@
 <?php
 	require __DIR__ . '/vendor/autoload.php';
 	use Dotenv\Dotenv;
-	$dotenv = Dotenv :: createImmutable(__DIR__);
+	$dotenv = Dotenv:: createImmutable(__DIR__);
 	$dotenv->load();
-
+	
 	$email_username = $_ENV["EMAIL_USERNAME"];
-	// echo $email_username; // tirar dps
-	// die();
 	$email_password = $_ENV["EMAIL_PASSWORD"];
-	$db_username= $_ENV["DB_USERNAME"];
-	$db_password= $_ENV["DB_PASSWORD"];
-
 	if($_GET)
 	{
 		//outras rotas
