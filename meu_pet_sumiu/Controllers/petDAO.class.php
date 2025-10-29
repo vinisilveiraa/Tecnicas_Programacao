@@ -32,6 +32,7 @@
 				$this->db = null;
 				return "Pet inserido com sucesso";
 			}
+			
 			catch (PDOException $e) {
 				$this->db = null;
 				return "Problema ao inserir pet";

@@ -83,6 +83,9 @@ class petController
 
 				$petDAO->inserir($pet);
 				// fazer upload da imagem
+				$caminho = "imagens/" . $_FILES["imagem"]["name"];
+				move_uploaded_file($_FILES["imagem"]["tmp_name"], $caminho);
+				
 				header("location:index.php");
 				die();
 			}
